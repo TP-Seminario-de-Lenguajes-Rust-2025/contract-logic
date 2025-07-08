@@ -1,5 +1,5 @@
 #![allow(dead_code)]
-mod orden;
-mod producto;
-mod publicacion;
-mod usuario;
+pub mod orden;
+pub mod producto;
+pub mod publicacion;
+pub mod usuario;
