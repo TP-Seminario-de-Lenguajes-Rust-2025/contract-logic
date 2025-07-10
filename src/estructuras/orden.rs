@@ -1,8 +1,10 @@
+use uuid::Uuid;
+
 pub enum EstadoOrden {
     Pendiente,
-    Enviada,
-    Recibida,
-    Cancelada,
+    Enviada, //solo lo puede modificar el vendedor
+    Recibida, //solo lo puede modificar el comprador
+    Cancelada, //tienen que estar ambos de acuerdo y tiene que estar en estado pendiente
 }
 
 pub struct Orden {
@@ -11,14 +13,30 @@ pub struct Orden {
     id_vendedor: String,
     id_comprador: String,
     status: EstadoOrden,
-    productos: Vec<String>,
+    productos: Vec<String>, //vec con uuid de los productos
     cal_vendedor: Option<u8>,  //calificacion que recibe el vendedor
     cal_comprador: Option<u8>, //calificacion que recibe el comprador
 }
 
+impl Default for Orden{
+    fn default() -> Self {
+        Orden{
+            id: "".to_string(),
+            id_vendedor: "".to_string(),
+            id_comprador: "".to_string(),
+            status: EstadoOrden::Pendiente,
+            productos: Vec::new(),
+            cal_vendedor: None,
+            cal_comprador: None, 
+        }
+    }
+}
+
 impl Orden {
-    pub fn crear_orden() -> Orden {
-        todo!("deberia devolver un Result<Orden>")
+    pub fn new(id_vendedor:String, id_comprador:String, productos:Vec<String>) -> Orden {
+        //verificar que productos no sea vacio
+        let id = Uuid::new_v4().to_string();
+        Orden{id, id_vendedor, id_comprador,productos, ..Default::default()}
     }
 
     //pub fn cambiar_estado

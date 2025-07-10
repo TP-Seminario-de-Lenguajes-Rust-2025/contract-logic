@@ -1,5 +1,7 @@
+use uuid::Uuid;
+
 pub struct Rol {
-    id: String,
+    id: String, //not a Uuid
     desc: String,
 }
 
@@ -15,6 +17,9 @@ struct Rating {
 }
 
 impl Rating {
+    fn new() -> Rating{
+        Rating { calificacion_comprador: (0,0), calificacion_vendedor: (0,0) }
+    }
     fn get_rating_comprador() -> f64 {
         todo!("debe devolver Result<f64,ErrDivisionZero>")
     }
@@ -29,11 +34,13 @@ pub struct Usuario {
     nombre: String,
     mail: String,
     rating: Rating,
+    roles: Vec<String> //id de rol
 }
 
 impl Usuario {
-    pub fn new() -> Usuario {
-        todo!()
+    pub fn new(nombre:String,mail:String,rol:Vec<String>) -> Usuario {
+        let id = Uuid::new_v4().to_string();
+        Usuario { id , nombre, mail, rating: Rating::new(), roles:rol}
     }
 
     pub fn get_rating_comprador() -> f64 {

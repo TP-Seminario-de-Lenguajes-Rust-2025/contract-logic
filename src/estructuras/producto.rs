@@ -1,3 +1,5 @@
+use uuid::Uuid;
+
 pub struct Categoria {
     id: String,
     nombre: String,
@@ -13,13 +15,14 @@ pub struct Producto {
     id: String,
     nombre: String,
     desc: String,
-    precio: f64,
-    stock: u8,
+    precio: String,
     categ: String,
 }
 
 impl Producto {
-    pub fn new() -> Producto {
-        todo!("debe devolver un Result<Producto>")
+    pub fn new(nombre: String,descripcion:String, precio:String,categoria: String) -> Producto {
+        //TODO: verificar que stock>0 y precio>0 y nombre y desc sean validos
+        let id = Uuid::new_v4().to_string();
+        Producto{id, nombre, desc: descripcion, precio, categ:categoria}
     }
 }
