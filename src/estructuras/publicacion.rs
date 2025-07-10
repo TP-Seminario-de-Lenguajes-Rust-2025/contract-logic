@@ -20,6 +20,6 @@ impl Publicacion {
 
     pub fn new(id_producto:String,id_user: String, stock:u8) -> Publicacion{
         let id= Uuid::new_v4().to_string();
-        Publicacion{id, id_prod:id_producto, id_user,stock: u8,activa:true}
+        Publicacion{id, id_prod:id_producto, id_user,stock,activa:true}
     }
 }
