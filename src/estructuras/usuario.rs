@@ -38,9 +38,13 @@ pub struct Usuario {
 }
 
 impl Usuario {
-    pub fn new(nombre:String,mail:String,rol:Vec<String>) -> Usuario {
+    pub fn new(nombre:String,mail:String,roles:Vec<String>) -> Usuario {
         let id = Uuid::new_v4().to_string();
-        Usuario { id , nombre, mail, rating: Rating::new(), roles:rol}
+        Usuario { id , nombre, mail, rating: Rating::new(), roles}
+    }
+
+    pub fn has_role(&self, rol:&str) ->bool{
+        self.roles.contains(&rol.to_string())
     }
 
     pub fn get_rating_comprador() -> f64 {
@@ -48,5 +52,9 @@ impl Usuario {
     }
     pub fn get_rating_vendedor() -> f64 {
         todo!()
+    }
+
+    pub fn agregar_rol(){
+        
     }
 }
